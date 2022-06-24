@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.modelo.Propietario;
 import com.uce.edu.demo.modelo.Vehiculo;
-import com.uce.edu.demo.service.IMatriculaService;
+import com.uce.edu.demo.service.IMatriculaGestorService;
 import com.uce.edu.demo.service.PropietarioServiceImpl;
 import com.uce.edu.demo.service.VehiculoServiceImpl;
 
@@ -23,7 +23,7 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 	private VehiculoServiceImpl vehiculoServiceImpl;
 
 	@Autowired
-	private IMatriculaService matriculaService;
+	private IMatriculaGestorService matriculaGestorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PruebaPaP2PmApplication.class, args);
@@ -48,13 +48,13 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 		v.setTipo("L");
 		v.setPrecio(new BigDecimal(20000));
 		this.vehiculoServiceImpl.registrarVehiculo(v);
-		
+
 		// Actualiar vehiculo
 		v.setTipo("P");
 		this.vehiculoServiceImpl.actualizarVehiculo(v);
 
 		// Matricular vehiculo
-		this.matriculaService.crearMatricula(p.getCedula(), v.getPlaca());
+		this.matriculaGestorService.generar(p.getCedula(), v.getPlaca());
 	}
 
 }

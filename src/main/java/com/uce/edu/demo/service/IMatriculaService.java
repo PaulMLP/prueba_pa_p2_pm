@@ -1,6 +1,8 @@
 package com.uce.edu.demo.service;
 
+import java.math.BigDecimal;
+
 public interface IMatriculaService {
 
-	public void crearMatricula(String cedula, String placa);
+	public BigDecimal calcular(BigDecimal precio);
 }
