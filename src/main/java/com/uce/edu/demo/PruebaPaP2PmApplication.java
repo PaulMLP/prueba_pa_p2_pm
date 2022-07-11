@@ -2,6 +2,7 @@ package com.uce.edu.demo;
 
 import java.math.BigDecimal;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,8 @@ import com.uce.edu.demo.service.VehiculoServiceImpl;
 @SpringBootApplication
 public class PruebaPaP2PmApplication implements CommandLineRunner {
 
+	private static Logger LOG = Logger.getLogger(PruebaPaP2PmApplication.class);
+	
 	@Autowired
 	private PropietarioServiceImpl propietarioServiceImpl;
 
@@ -37,7 +40,6 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 		p.setNombre("Paul");
 		p.setApellido("Merizalde");
 		p.setCedula("1728189521");
-
 		this.propietarioServiceImpl.crearPropietario(p);
 
 		// Crear un vehiculo
@@ -50,11 +52,16 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 		this.vehiculoServiceImpl.registrarVehiculo(v);
 
 		// Actualiar vehiculo
+		v.setId(1);
+		v.setMarca("Ford");
+		v.setModelo("EcoSport");
+		v.setPlaca("PIT012");
 		v.setTipo("P");
+		v.setPrecio(new BigDecimal(19000));
 		this.vehiculoServiceImpl.actualizarVehiculo(v);
 
 		// Matricular vehiculo
-		this.matriculaGestorService.generar(p.getCedula(), v.getPlaca());
+		//this.matriculaGestorService.generar(p.getCedula(), v.getPlaca());
 	}
 
 }

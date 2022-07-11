@@ -1,17 +1,22 @@
 package com.uce.edu.demo.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.modelo.Matricula;
 
 @Repository
-public class MatriculaRepositoryImpl implements IMatriculaRepository{
+@Transactional
+public class MatriculaRepositoryImpl implements IMatriculaRepository {
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public void insertar(Matricula m) {
-		// TODO Auto-generated method stub
-		System.out.println("Se inserto matricula "+m+" en la base de datos");
+		this.entityManager.persist(m);
 	}
 
-	
 }

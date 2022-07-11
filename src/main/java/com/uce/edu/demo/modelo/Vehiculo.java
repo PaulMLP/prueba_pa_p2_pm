@@ -2,18 +2,43 @@ package com.uce.edu.demo.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "vehiculo")
 public class Vehiculo {
 
+	@Id
+	@Column(name = "vehi_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehi_seq_id")
+	@SequenceGenerator(name="vehi_id",sequenceName="vehi_seq_id", allocationSize = 1)
+	private Integer id;
+
+	@Column(name = "vehi_marca")
 	private String marca;
+
+	@Column(name = "vehi_modelo")
 	private String modelo;
+
+	@Column(name = "vehi_placa")
 	private String placa;
+
+	@Column(name = "vehi_tipo")
 	private String tipo;
+
+	@Column(name = "vehi_precio")
 	private BigDecimal precio;
 
 	@Override
 	public String toString() {
-		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", placa=" + placa + ", tipo=" + tipo + ", precio="
-				+ precio + "]";
+		return "Vehiculo [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", placa=" + placa + ", tipo=" + tipo
+				+ ", precio=" + precio + "]";
 	}
 
 	// SET y GET
@@ -57,4 +82,11 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

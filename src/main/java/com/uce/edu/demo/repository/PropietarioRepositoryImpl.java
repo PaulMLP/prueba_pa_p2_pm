@@ -1,32 +1,38 @@
 package com.uce.edu.demo.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.modelo.Propietario;
 
 @Repository
+@Transactional
 public class PropietarioRepositoryImpl implements IPropietarioRepository{
 
+	@PersistenceContext
+	private EntityManager entityManager;
+	
 	@Override
 	public void insertar(Propietario p) {
-		// TODO Auto-generated method stub
-		System.out.println("Se inserto propietario "+p+" en la base de datos");
+		this.entityManager.persist(p);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
-		// TODO Auto-generated method stub
-		System.out.println("Se elimino propietario con cedula: "+cedula);
+	public int eliminar(String cedula) {
+		Query myQuery = this.entityManager.createQuery("DELETE FROM Propietario p WHERE p.cedula = :datoCedula");
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.executeUpdate();
 	}
 
 	@Override
 	public Propietario buscar(String cedula) {
-		// TODO Auto-generated method stub
-		Propietario p = new Propietario();
-		p.setCedula(cedula);
-		p.setApellido("Merizalde");
-		p.setNombre("Paul");
-		return p;
+		Query jpqlQuery = this.entityManager.createQuery("SELECT p FROM Propietario p WHERE p.cedula = :datoCedula"); // JPQL
+		jpqlQuery.setParameter("datoCedula", cedula);
+		return (Propietario) jpqlQuery.getSingleResult();
 	}
 
 }

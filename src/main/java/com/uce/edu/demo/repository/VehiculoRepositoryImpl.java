@@ -1,42 +1,43 @@
 package com.uce.edu.demo.repository;
 
-import java.math.BigDecimal;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.modelo.Vehiculo;
 
 @Repository
+@Transactional
 public class VehiculoRepositoryImpl implements IVehiculoRepository {
+
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public void insertar(Vehiculo v) {
-		// TODO Auto-generated method stub
-		System.out.println("Se inserto el vehiculo: " + v+"a la base de datos");
+		this.entityManager.persist(v);
 	}
 
 	@Override
 	public Vehiculo buscar(String placa) {
-		// TODO Auto-generated method stub
-		Vehiculo v = new Vehiculo();
-		v.setMarca("Ford");
-		v.setModelo("EcoSport");
-		v.setPlaca(placa);
-		v.setPrecio(new BigDecimal(20000));
-		v.setTipo("P");
-		return v;
+		Query jpqlQuery = this.entityManager.createQuery("SELECT v FROM Vehiculo v WHERE v.placa = :datoPlaca"); // JPQL
+		jpqlQuery.setParameter("datoPlaca", placa);
+		return (Vehiculo) jpqlQuery.getSingleResult();
 	}
 
 	@Override
 	public void actualizar(Vehiculo v) {
-		// TODO Auto-generated method stub
-		System.out.println("Se actualizo el vehiculo "+v);
+		this.entityManager.merge(v);
 	}
 
 	@Override
-	public void eliminar(String placa) {
-		// TODO Auto-generated method stub
-		System.out.println("Se elimino vehiculo con placa "+placa);
+	public int eliminar(String placa) {
+		Query myQuery = this.entityManager.createQuery("DELETE FROM Vehiculo v WHERE v.placa = :datoPlaca");
+		myQuery.setParameter("datoPlaca", placa);
+		return myQuery.executeUpdate();
 	}
 
 }

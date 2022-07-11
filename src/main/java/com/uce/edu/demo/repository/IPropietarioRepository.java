@@ -8,8 +8,8 @@ public interface IPropietarioRepository {
 	public void insertar(Propietario p);
 
 	// Eliminar
-	public void eliminar(String cedula);
-	
-	//Buscar
+	public int eliminar(String cedula);
+
+	// Buscar
 	public Propietario buscar(String cedula);
 }
