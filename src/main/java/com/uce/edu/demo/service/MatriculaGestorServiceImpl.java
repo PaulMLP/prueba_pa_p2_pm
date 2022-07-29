@@ -50,13 +50,13 @@ public class MatriculaGestorServiceImpl implements IMatriculaGestorService {
 			BigDecimal valorDescuento = valorMatricula.multiply(new BigDecimal(7)).divide(new BigDecimal(100));
 			valorMatricula = valorMatricula.subtract(valorDescuento);
 		}
-//		Matricula matricula = new Matricula();
-//		matricula.setFecha_matricula(LocalDateTime.now());
-//		matricula.setPropietario(pro);
-//		matricula.setVehiculo(vehi);
-//		matricula.setValor_matricula(valorMatricula);
+		Matricula matricula = new Matricula();
+		matricula.setFecha_matricula(LocalDateTime.now());
+		matricula.setPropietario(pro);
+		matricula.setVehiculo(vehi);
+		matricula.setValor_matricula(valorMatricula);
 		
-//		this.matriculaRepository.insertar(matricula);
+		this.matriculaRepository.insertar(matricula);
 	}
 
 }

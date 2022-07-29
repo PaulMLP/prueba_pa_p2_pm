@@ -11,6 +11,7 @@ import com.uce.edu.demo.modelo.Matricula;
 @Repository
 @Transactional
 public class MatriculaRepositoryImpl implements IMatriculaRepository {
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 

@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.modelo.Propietario;
 import com.uce.edu.demo.modelo.Vehiculo;
 import com.uce.edu.demo.service.IMatriculaGestorService;
+import com.uce.edu.demo.service.IPropietarioService;
+import com.uce.edu.demo.service.IVehiculoService;
 import com.uce.edu.demo.service.PropietarioServiceImpl;
 import com.uce.edu.demo.service.VehiculoServiceImpl;
 
@@ -20,10 +22,10 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 	private static Logger LOG = Logger.getLogger(PruebaPaP2PmApplication.class);
 	
 	@Autowired
-	private PropietarioServiceImpl propietarioServiceImpl;
+	private IPropietarioService propietarioService;
 
 	@Autowired
-	private VehiculoServiceImpl vehiculoServiceImpl;
+	private IVehiculoService vehiculoService;
 
 	@Autowired
 	private IMatriculaGestorService matriculaGestorService;
@@ -40,7 +42,7 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 		p.setNombre("Paul");
 		p.setApellido("Merizalde");
 		p.setCedula("1728189521");
-		this.propietarioServiceImpl.crearPropietario(p);
+		this.propietarioService.crearPropietario(p);
 
 		// Crear un vehiculo
 		Vehiculo v = new Vehiculo();
@@ -49,19 +51,19 @@ public class PruebaPaP2PmApplication implements CommandLineRunner {
 		v.setPlaca("PIT012");
 		v.setTipo("L");
 		v.setPrecio(new BigDecimal(20000));
-		this.vehiculoServiceImpl.registrarVehiculo(v);
+		this.vehiculoService.registrarVehiculo(v);
 
-		// Actualiar vehiculo
-		v.setId(1);
-		v.setMarca("Ford");
-		v.setModelo("EcoSport");
-		v.setPlaca("PIT012");
-		v.setTipo("P");
-		v.setPrecio(new BigDecimal(19000));
-		this.vehiculoServiceImpl.actualizarVehiculo(v);
+//		// Actualiar vehiculo
+//		v.setId(1);
+//		v.setMarca("Ford");
+//		v.setModelo("EcoSport");
+//		v.setPlaca("PIT012");
+//		v.setTipo("P");
+//		v.setPrecio(new BigDecimal(19000));
+//		this.vehiculoService.actualizarVehiculo(v);
 
 		// Matricular vehiculo
-		//this.matriculaGestorService.generar(p.getCedula(), v.getPlaca());
+		this.matriculaGestorService.generar(p.getCedula(), v.getPlaca());
 	}
 
 }

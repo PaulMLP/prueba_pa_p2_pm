@@ -14,25 +14,21 @@ public class VehiculoServiceImpl implements IVehiculoService {
 
 	@Override
 	public void registrarVehiculo(Vehiculo v) {
-		// TODO Auto-generated method stub
 		this.vehiculoRepository.insertar(v);
 	}
 
 	@Override
 	public Vehiculo buscarVehiculo(String placa) {
-		// TODO Auto-generated method stub
 		return this.vehiculoRepository.buscar(placa);
 	}
 
 	@Override
 	public void actualizarVehiculo(Vehiculo v) {
-		// TODO Auto-generated method stub
 		this.vehiculoRepository.actualizar(v);
 	}
 
 	@Override
 	public void removerVehiculo(String placa) {
-		// TODO Auto-generated method stub
 		this.vehiculoRepository.eliminar(placa);
 	}
 

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,7 +18,7 @@ public class Vehiculo {
 	@Id
 	@Column(name = "vehi_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehi_seq_id")
-	@SequenceGenerator(name="vehi_id",sequenceName="vehi_seq_id", allocationSize = 1)
+	@SequenceGenerator(name = "vehi_id", sequenceName = "vehi_seq_id", allocationSize = 1)
 	private Integer id;
 
 	@Column(name = "vehi_marca")
@@ -34,6 +35,9 @@ public class Vehiculo {
 
 	@Column(name = "vehi_precio")
 	private BigDecimal precio;
+
+	@OneToOne(mappedBy = "vehiculo")
+	private Matricula matricula;
 
 	@Override
 	public String toString() {
@@ -89,4 +93,13 @@ public class Vehiculo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public Matricula getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+
 }

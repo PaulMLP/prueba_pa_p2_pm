@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,18 +35,15 @@ public class Matricula {
 	
 	@Column(name = "matr_valor_matricula")
 	private BigDecimal valor_matricula;
-//	
-//	@Column(name = "matr_propietario")
-//	private Propietario propietario;
-//	
-//	@Column(name = "matr_vehiculo")
-//	private Vehiculo vehiculo;
+	
+	@ManyToOne
+	@JoinColumn(name = "matr_id_prop")
+	private Propietario propietario;
+	
+	@OneToOne
+	@JoinColumn(name = "matr_id_vehi")
+	private Vehiculo vehiculo;
 
-//	@Override
-//	public String toString() {
-//		return "Matricula [id=" + id + ", fecha_matricula=" + fecha_matricula + ", valor_matricula=" + valor_matricula
-//				+ ", propietario=" + propietario + ", vehiculo=" + vehiculo + "]";
-//	}
 
 	// SET y GET
 	public LocalDateTime getFecha_matricula() {
@@ -62,28 +62,28 @@ public class Matricula {
 		this.valor_matricula = valor_matricula;
 	}
 
-//	public Propietario getPropietario() {
-//		return propietario;
-//	}
-//
-//	public void setPropietario(Propietario propietario) {
-//		this.propietario = propietario;
-//	}
-//
-//	public Vehiculo getVehiculo() {
-//		return vehiculo;
-//	}
-//
-//	public void setVehiculo(Vehiculo vehiculo) {
-//		this.vehiculo = vehiculo;
-//	}
-
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Propietario getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Propietario propietario) {
+		this.propietario = propietario;
+	}
+
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 
 }
